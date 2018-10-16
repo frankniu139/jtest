@@ -5,8 +5,7 @@ pipeline {
                 parallel {
                     stage('Build Image') {
                       steps {
-                        sh 'docker build -f deploy.Dockerfile \
-                        -t cd78/escc:latest .'
+                        sh 'echo aaaaa>>a.txt'
                       }
                     }
                     
