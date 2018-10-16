@@ -2,8 +2,19 @@ pipeline {
     agent any
         stages {
             stage('Build') {
-                steps {
-                    echo 'This is the Build Stage'
+                parallel {
+                    stage('Build Image') {
+                      steps {
+                        sh 'docker build -f deploy.Dockerfile \
+                        -t cd78/escc:latest .'
+                      }
+                    }
+                    
+                  }
+                post {
+                    failure {
+                        echo 'This build has failed. See logs for details.'
+                    }
                 }
             }
             stage('Test') {
